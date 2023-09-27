@@ -8,13 +8,14 @@ import { level3 } from './levels/level3'
 
 function Level({playerOne, playerTwo}) {
   const [level, setLevel] = useState(null)
-  const [playerTurn, setPlayerTurn] = useState(1)
+  const [playerOneTurn, setPlayerOneTurn] = useState(true)
   const [timer, setTimer] = useState(60)
   const [keyChar, setKeyChar] = useState(null)
   const [levelArray, setLevelArray] = useState([])
   const [round, setRound] = useState(0)
   const [wordInput, setWordInput] = useState('')
   const [levelStarted, setLevelStarted] = useState(false)
+  const [endLevelScreen, setEndLevelScreen] = useState(false)
   useEffect(() => {
     if(playerOne.level === 0 && playerTwo.level === 0) {
         setLevelArray(level1)
@@ -49,6 +50,7 @@ function Level({playerOne, playerTwo}) {
     if(wordInput[wordInput.length - 1] === levelArray[round][wordInput.length - 1]) {
         if(wordInput.length === levelArray[round]?.length) {
             setRound(prev => prev + 1)
+            setPlayerOneTurn(!playerOneTurn)
             setWordInput('')
         }
         return
@@ -56,9 +58,14 @@ function Level({playerOne, playerTwo}) {
     setWordInput('')
   },[wordInput])
   useEffect(() => {
-    if(round === 9) {
+    if(round === 10) {
+        setEndLevelScreen(true)
+        setTimeout(() => {
         setLevelStarted(false)
+        setEndLevelScreen(false)
         playersLevelUpHandler()
+        },5000)
+        
     }
   },[round])
   function playersLevelUpHandler() {
@@ -80,10 +87,11 @@ function Level({playerOne, playerTwo}) {
         <button onClick={() => setLevelStarted(true)}>Start Level {level}</button>
       </div> : 
       <>
+      {endLevelScreen ? <h2 className='text-6xl text-center py-4 text-green-700 animate-pulse'>LEVEL COMPLETE!</h2> : null}
       <h2 className='text-6xl text-center py-4'>Level {level}:</h2>
-      <h3 className='text-3xl text-center'>Turn: <strong style={{color: playerOne.color}}>P{playerTurn}</strong></h3>
+      <h3 className='text-3xl text-center'>Turn: <strong style={playerOneTurn ? {color: playerOne.color} : {color: playerTwo.color}}>P{playerOneTurn ? '1' : '2'}</strong></h3>
       <h3 className='text-xl text-center'>Time: {timer}</h3>
-      <Keyboard keyChar={keyChar}/>
+      <Keyboard keyChar={keyChar} round={round}/>
       <input autoFocus className='block mx-auto my-24 text-black' value={wordInput} type='text' onKeyDown={(e) => {handleKeyDown(e); setWordInput(prev => prev + e.key)}}></input>
       <p className='text-center text-6xl'>{levelArray[round]}</p></>}
       

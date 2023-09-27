@@ -11,7 +11,7 @@ function Introduction({playerOne, playerTwo, setLevel}) {
         <li>Each level must be finished before the timer runs out.</li>
         <li>If you press an incorrect key, the input will reset and you will have to start at the first letter again.</li>
       </ol>
-      <p className='max-w-xl text-3xl'>Don't worry, this level will be an easy one. And we'll even remove the timer.</p>
+      <p className='max-w-xl text-3xl'>Don't worry, this level will be an easy one..</p>
       <button onClick={() => setLevel(1)} className='animate-pulse bg-green-700 block mx-auto my-4 py-8 px-16 text-6xl'>Start Level 1</button>
     </div>
   )

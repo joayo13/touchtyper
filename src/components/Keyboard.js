@@ -1,10 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Keyboard({keyChar}) {
+function Keyboard({keyChar, round}) {
+  const [leftTranslate, setLeftTranslate] = useState(0)
+  const [rightTranslate, setRightTranslate] = useState(0)
+  const [levelFinished, setLevelFinished] = useState(false)
+  useEffect(() => {
+    if(round === 1) {
+      setLeftTranslate(52)
+      return
+    }
+    if(round === 2) {
+      setRightTranslate(52)
+      return
+    }
+    if(round === 3) {
+      setLeftTranslate(104)
+      return
+    }
+    if(round === 4) {
+      setRightTranslate(104)
+      return
+    }
+    if(round === 5) {
+      setLeftTranslate(156)
+      return
+    }
+    if(round === 6) {
+      setRightTranslate(156)
+      return
+    }
+    if(round === 7) {
+      setLeftTranslate(208)
+      return
+    }
+    if(round === 8) {
+      setRightTranslate(208)
+      return
+    }
+    if(round === 9) {
+      setLeftTranslate(260)
+      return
+    }
+    if(round === 10) {
+      setRightTranslate(260)
+      setLevelFinished(true)
+      return
+    }
+    
+  },[round])
   
   return (
-    <div className='relative max-w-xl mx-auto'>
-     <div className='absolute left-0 flex flex-col'>
+    <div style={levelFinished ? {color: 'green'} : null} className={levelFinished ? 'relative max-w-xl mx-auto animate-pulse' : 'relative max-w-xl mx-auto'}>
+     <div style={{transform: `translateX(${leftTranslate}%)`}} className='absolute left-0 flex flex-col'>
         <ul className='flex'>
             <li style={keyChar === 'q' ? {color: 'green'} : null}>Q</li>
             <li style={keyChar === 'w' ? {color: 'green'} : null}>W</li>
@@ -27,7 +74,7 @@ function Keyboard({keyChar}) {
             <li style={keyChar === 'b' ? {color: 'green'} : null}>B</li>
         </ul>
      </div>
-     <div className='flex absolute right-0 flex-col'>
+     <div style={{transform: `translateX(-${rightTranslate}%)`}} className='flex absolute right-0 flex-col'>
      <ul className='flex'>
             <li style={keyChar === 'y' ? {color: 'green'} : null}>Y</li>
             <li style={keyChar === 'u' ? {color: 'green'} : null}>U</li>

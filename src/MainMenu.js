@@ -32,6 +32,10 @@ function MainMenu({playerOne, playerTwo, setPlayerOne, setPlayerTwo, setGameStar
       <button onClick={() => setCreateNewProfile(true)} className='bg-gray-600 max-w-min p-8 rounded-full text-3xl'>+</button>
       <p>New Profile</p>
       </div>
+      <div className='flex flex-col gap-2 items-center text-center'>
+      <button onClick={() => localStorage.setItem('profiles', JSON.stringify([]))} className='bg-red-600 max-w-min p-8 rounded-full text-3xl'>X</button>
+      <p>clear profiles</p>
+      </div>
       </section>
       {playerOne.name && playerTwo.name ? <button onClick={() => setGameStarted(true)} className='animate-pulse bg-green-700 block mx-auto py-8 px-16 text-6xl'>Start Game</button> : null}
       {createNewProfile ? 
