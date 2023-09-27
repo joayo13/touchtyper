@@ -7,7 +7,7 @@ function NewProfile({setProfileAdded, setCreateNewProfile}) {
           if(JSON.parse(localStorage.getItem('profiles').length > 0)) {
             profiles = JSON.parse(localStorage.getItem('profiles'))
           }
-          profiles.push({name: e.target.name.value, color: e.target.color.value})
+          profiles.push({name: e.target.name.value, color: e.target.color.value, level: 0})
           localStorage.setItem('profiles', JSON.stringify(profiles))
           setCreateNewProfile(false)
           setProfileAdded(true)
