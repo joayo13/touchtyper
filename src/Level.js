@@ -9,6 +9,19 @@ import { level5 } from './levels/level5'
 import { level6 } from './levels/level6'
 import { level7 } from './levels/level7'
 import { level8 } from './levels/level8'
+import sfx0 from './sounds/0fx.mp3'
+import sfx1 from './sounds/1fx.mp3'
+import sfx2 from './sounds/2fx.mp3'
+import sfx3 from './sounds/3fx.mp3'
+import sfx4 from './sounds/4fx.mp3'
+import sfx5 from './sounds/5fx.mp3'
+import sfx6 from './sounds/6fx.mp3'
+import errorSound from './sounds/errorsfx.mp3'
+import wordPass from './sounds/wordvictoryfx.mp3'
+import levelComplete from './sounds/levelcompletesfx.mp3'
+import levelFailedSfx from './sounds/levelfailedsfx.mp3'
+import radiohead from './sounds/endscreen.mp3'
+import useSound from 'use-sound'
 function Level({playerOne, playerTwo}) {
   const [level, setLevel] = useState(null)
   const [playerOneTurn, setPlayerOneTurn] = useState(true)
@@ -21,12 +34,25 @@ function Level({playerOne, playerTwo}) {
   const [endLevelScreen, setEndLevelScreen] = useState(false)
   const [levelFailed, setLevelFailed] = useState(false)
   const [win, setWin] = useState(false)
+  const [boop0] = useSound(sfx0)
+  const [boop1] = useSound(sfx1)
+  const [boop2] = useSound(sfx2)
+  const [boop3] = useSound(sfx3)
+  const [boop4] = useSound(sfx4)
+  const [boop5] = useSound(sfx5)
+  const [boop6] = useSound(sfx6)
+  const [wordVictory] = useSound(wordPass)
+  const [errorSfx] = useSound(errorSound)
+  const [levelVictory] = useSound(levelComplete)
+  const [levelFail] = useSound(levelFailedSfx)
+  const [endMusic] = useSound(radiohead)
   useEffect(() => {
-    if(!levelStarted || endLevelScreen) {
+    if(!levelStarted || endLevelScreen || win) {
       return
     }
     if(timer <= 0) {
       setLevelFailed(true)
+      levelFail()
       setTimeout(() => {
         setLevelStarted(false)
         setRound(0)
@@ -90,6 +116,7 @@ function Level({playerOne, playerTwo}) {
   }
   if(level === 9) {
     setWin(true)
+    return
   }
   }, [level])
   function handleKeyDown(e) {
@@ -100,18 +127,43 @@ function Level({playerOne, playerTwo}) {
         return
     }
     if(wordInput[wordInput.length - 1] === levelArray[round][wordInput.length - 1]) {
-        if(wordInput.length === levelArray[round]?.length) {
-            setRound(prev => prev + 1)
-            setPlayerOneTurn(!playerOneTurn)
-            setWordInput('')
-        }
+      if(wordInput.length === levelArray[round]?.length) {
+        wordVictory()
+        setRound(prev => prev + 1)
+        setPlayerOneTurn(!playerOneTurn)
+        setWordInput('')
         return
     }
+      if(wordInput.length === 1) {
+        boop0()
+      }
+      if(wordInput.length === 2) {
+        boop1()
+      }
+      if(wordInput.length === 3) {
+        boop2()
+      }
+      if(wordInput.length === 4) {
+        boop3()
+      }
+      if(wordInput.length === 5) {
+        boop4()
+      }
+      if(wordInput.length === 6) {
+        boop5()
+      }
+      if(wordInput.length === 7) {
+        boop6() 
+      }
+        return
+    }
+    errorSfx()
     setWordInput('')
   },[wordInput])
   useEffect(() => {
     if(round === 10) {
         setEndLevelScreen(true)
+        levelVictory()
         setTimeout(() => {
         setLevelStarted(false)
         setEndLevelScreen(false)
@@ -138,7 +190,7 @@ function Level({playerOne, playerTwo}) {
       <>
       {!levelStarted ? 
       <div className='flex h-screen w-screen items-center justify-center'>
-        <button className='bg-green-700 py-2 px-4' onClick={() => setLevelStarted(true)}>{level < 9 ? `Start Level ${level}` : '???'}</button>
+        <button className='bg-green-700 py-2 px-4' onClick={() => { level < 9 ? setLevelStarted(true) : endMusic(); setLevelStarted(true)}}>{level < 9 ? `Start Level ${level}` : '???'}</button>
       </div> : 
       <>
       {win ? 
