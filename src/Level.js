@@ -150,7 +150,7 @@ function Level({playerOne, playerTwo}) {
       <h3 className='text-3xl text-center'>Turn: <strong style={playerOneTurn ? {color: playerOne.color} : {color: playerTwo.color}}>P{playerOneTurn ? '1' : '2'}</strong></h3>
       <h3 className={timer > 15 ? 'text-xl text-center' : 'text-xl text-center text-red-700 animate-pulse'}>Time: {timer}</h3>
       <Keyboard keyChar={keyChar} round={round}/>
-      <input autoFocus className='block mx-auto my-24 bg-gray-800 py-2 px-4 text-center' value={wordInput} type='text' onKeyDown={(e) => {handleKeyDown(e); setWordInput(prev => prev + e.key)}}></input>
+      <input disabled={endLevelScreen} autoFocus className='block mx-auto my-24 bg-gray-800 py-2 px-4 text-center' value={wordInput} type='text' onKeyDown={(e) => {handleKeyDown(e); setWordInput(prev => prev + e.key)}}></input>
       <p className='text-center text-6xl'>{levelArray[round]}</p></>}
       </>}
       
