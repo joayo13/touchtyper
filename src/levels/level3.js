@@ -1,4 +1,4 @@
-const level3 = ['vex', 'hon', 'wax', 'hui', 'wex', 'hun', 'zag', 'loy', 'zed', 'noh']
+const level3 = ['zarf', 'muon', 'czar', 'kohl', 'axed', 'oink', 'vaws', 'kiln', 'cave', 'limo']
 
 export {level3}
 
