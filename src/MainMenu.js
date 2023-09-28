@@ -37,7 +37,7 @@ function MainMenu({playerOne, playerTwo, setPlayerOne, setPlayerTwo, setGameStar
       <p>clear profiles</p>
       </div>
       </section>
-      {playerOne.name && playerTwo.name ? <button onClick={() => setGameStarted(true)} className='animate-pulse bg-green-700 block mx-auto py-8 px-16 text-6xl'>Start Game</button> : null}
+      {playerOne.name && playerTwo.name ? <button onClick={() => setGameStarted(true)} className='animate-pulse bg-green-700 block mx-auto py-8 px-16 text-3xl my-4'>Start Game</button> : null}
       {createNewProfile ? 
       <NewProfile 
       setProfileAdded={setProfileAdded} 

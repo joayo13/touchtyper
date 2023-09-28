@@ -151,7 +151,9 @@ function Level({playerOne, playerTwo}) {
       <h3 className={timer > 15 ? 'text-xl text-center' : 'text-xl text-center text-red-700 animate-pulse'}>Time: {timer}</h3>
       <Keyboard keyChar={keyChar} round={round}/>
       <input disabled={endLevelScreen} autoFocus className='block mx-auto my-24 bg-gray-800 py-2 px-4 text-center' value={wordInput} type='text' onKeyDown={(e) => {handleKeyDown(e); setWordInput(prev => prev + e.key)}}></input>
-      <p className='text-center text-6xl'>{levelArray[round]}</p></>}
+      <p className='w-min mx-auto relative text-6xl'>{levelArray[round]}
+      <p className='absolute text-6xl top-0 left-0 text-green-700 text-center'>{wordInput}</p>
+      </p></>}
       </>}
       
       </>
