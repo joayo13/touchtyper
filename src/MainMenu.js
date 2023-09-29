@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import keys from './keys.png'
+import keys from './8bitkeys.png'
 import NewProfile from './components/NewProfile';
 import SignInProfile from './components/SignInProfile';
 

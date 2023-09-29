@@ -199,10 +199,10 @@ function Level({playerOne, playerTwo}) {
       {levelFailed ? <h2 className='text-6xl text-center py-4 text-red-700 animate-pulse'>LEVEL FAILED</h2> : null}
       {endLevelScreen ? <h2 className='text-6xl text-center py-4 text-green-700 animate-pulse'>LEVEL COMPLETE!</h2> : null}
       <h2 className='text-6xl text-center py-4'>Level {level}:</h2>
-      <h3 className='text-3xl text-center'>Turn: <strong style={playerOneTurn ? {color: playerOne.color} : {color: playerTwo.color}}>P{playerOneTurn ? '1' : '2'}</strong></h3>
+      <h3 className='text-4xl text-center py-4'>Turn: <strong style={playerOneTurn ? {color: playerOne.color} : {color: playerTwo.color}}>P{playerOneTurn ? '1' : '2'}</strong></h3>
       <h3 className={timer > 15 ? 'text-xl text-center' : 'text-xl text-center text-red-700 animate-pulse'}>Time: {timer}</h3>
       <Keyboard keyChar={keyChar} round={round}/>
-      <input disabled={endLevelScreen} autoFocus className='block mx-auto my-24 bg-gray-800 py-2 px-4 text-center' value={wordInput} type='text' onKeyDown={(e) => {handleKeyDown(e); setWordInput(prev => prev + e.key)}}></input>
+      <input disabled={endLevelScreen || levelFailed} autoFocus className='block mx-auto my-24 bg-gray-800 py-2 px-4 text-center' value={wordInput} type='text' onKeyDown={(e) => {handleKeyDown(e); setWordInput(prev => prev + e.key.toLowerCase())}}></input>
       <p className='w-min mx-auto relative text-6xl'>{levelArray[round]}
       <p className='absolute text-6xl top-0 left-0 text-green-700 text-center'>{wordInput}</p>
       </p></>}
